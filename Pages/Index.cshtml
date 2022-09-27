@@ -1,0 +1,55 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div>
+    <div>
+        <h6>Add your recorded wish for your favourite person</h6>
+        <form class="row g-3" enctype="multipart/form-data" method="post">
+            <div class="col-auto">
+                <input type="text" class="form-control" asp-for="UserViewModel.WishingPerson" placeholder="Your name">
+            </div>
+            <div class="col-auto">
+                <input type="file" class="form-control" asp-for="UserViewModel.Audio" accept="audio/*">
+            </div>
+            <div class="col-auto">
+                <input type="submit" class="btn btn-success" value="Add wish">
+            </div>
+        </form>
+    </div>
+
+    <h6 class="mt-5">List of Wishes for my cousins</h6>
+    <ol>
+    
+
+        @foreach (var item in Model.AudioFiles)
+        {
+            <li class="mb-3">
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Voice of @item.WishingPerson</span>
+                </div>
+
+                <audio src="@item.FileUrl" id="@item.Id"></audio>
+                <button onclick="play(@item.Id)" class="btn btn-secondary col-12">Play/Pause Audio</button>
+            </li>
+        }
+    </ol>
+</div>
+
+
+
+<script>
+    function play(fileId) {
+        var audio = document.getElementById(fileId);
+
+        console.log(audio)
+        if (audio.paused) {
+            audio.play()
+        }
+        else {
+            audio.pause();
+        }
+    }
+</script>

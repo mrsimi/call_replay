@@ -1,0 +1,7 @@
+bin
+obj
+Properties
+.vscode
+*.db
+uploads
+wwwroot/uploads
